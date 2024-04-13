@@ -1,0 +1,48 @@
+<mat-accordion>
+  @for (group of transactionsGroups; track group.token0Id) {
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <!-- <div class="home__panel-description">
+            <span>
+              {{
+                group.transactions[0].blockTimestamp | date: "HH:mm" : "UTC+3"
+              }}
+            </span>
+            <span>{{ group.totalValue | numberFormatter }}$</span>
+          </div> -->
+        </mat-panel-title>
+
+        <mat-panel-description>
+          <!-- <a
+            href="https://www.google.com/search?q={{
+              group.tokenSymbol
+            }}+coin&sourceid=chrome&ie=UTF-8"
+            target="_blank"
+            class="home__panel-title"
+          >
+            <div class="home__panel-title-img">
+              <img
+                [src]="group.tokenId | transactionsTokenName"
+                [alt]="group.tokenId"
+              />
+            </div>
+            <b>{{ group.tokenSymbol }}</b>
+          </a> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <!-- @for (transaction of group.swaps; track transaction.tokenId) {
+        <div class="home__panel-body">
+          <b>
+            {{ transaction.blockTimestamp | date: "HH:mm" : "UTC+3" }}
+          </b>
+          <span>
+            {{ transaction.historicalUSD / transaction.unitValue | currency }}
+          </span>
+          <span>{{ transaction.historicalUSD | numberFormatter }}$</span>
+        </div>
+      } -->
+    </mat-expansion-panel>
+  }
+</mat-accordion>
