@@ -1,0 +1,8 @@
+<mat-form-field appearance="outline">
+  <mat-label>Volume</mat-label>
+  <mat-select [(ngModel)]="selectedVolume" (ngModelChange)="onVolumeChange()">
+    @for (option of volumeOptions; track option.value) {
+      <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>

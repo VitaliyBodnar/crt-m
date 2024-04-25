@@ -1,5 +1,7 @@
 {
   "name": "crt-m",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular-standalone"
 }

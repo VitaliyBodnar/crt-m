@@ -1,0 +1,53 @@
+.user-info {
+  position: relative;
+
+  &__filter {
+    padding-block-start: 5px;
+  }
+
+  &__user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-inline-start: 5px;
+    margin-inline-end: 0;
+  }
+
+  &__back-button {
+    display: flex;
+    flex-direction: row-reverse;
+    position: fixed;
+    bottom: 13px;
+    right: 13px;
+    z-index: 10;
+
+    mat-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__refresh-button {
+    width: 29px !important;
+    height: 29px !important;
+    line-height: 29px !important;
+
+    .mat-icon {
+      width: 18px !important;
+      height: 18px !important;
+      line-height: 18px !important;
+    }
+    .material-icons {
+      font-size: 18px !important;
+    }
+  }
+
+  &__line {
+    height: 1px;
+    background-color: #ccc;
+    border: none;
+    margin-inline-end: -10px;
+    margin-inline-start: -10px;
+    margin-block-end: 20px;
+  }
+}

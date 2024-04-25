@@ -1,41 +1,20 @@
 <div class="transactions">
   <div class="transactions__filter">
-    <mat-form-field>
-      <mat-label>Volume</mat-label>
-      <mat-select
-        [(ngModel)]="selectedVolume"
-        (ngModelChange)="onVolumeChange()"
-      >
-        @for (option of volumeOptions; track option.value) {
-          <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+    <crt-transactions-volume
+      (volumeChange)="onVolumeChange($event)"
+    ></crt-transactions-volume>
   </div>
   <div class="transactions__inner">
-    @if (isLoading$ | async) {
-      <div class="transactions__loader">
-        <mat-spinner></mat-spinner>
-      </div>
-    }
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
-        <!-- <div class="swiper-slide">
-          <crt-transactions-groups-list
-            [transactionsGroups]="transactionsGroups"
-          ></crt-transactions-groups-list>
-        </div> -->
         <div class="swiper-slide">
           <crt-transactions-table
             [transactions]="transactions"
+            [isLoading]="isLoading$ | async"
+            (selectRow)="onSelectRow($event)"
           ></crt-transactions-table>
         </div>
       </div>
     </div>
-  </div>
-  <div class="transactions__action-refresh">
-    <button (click)="getTransactionsList()" mat-mini-fab color="primary">
-      <mat-icon>cached</mat-icon>
-    </button>
   </div>
 </div>

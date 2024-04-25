@@ -1,0 +1,96 @@
+@if (isLoading) {
+  <div class="transactions-table__spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+}
+@if (!isLoading && transactions?.length) {
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Transaction</th>
+        <th scope="col">Sell</th>
+        <th scope="col">Buy</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of transactions; track row.blockHash) {
+        <tr (click)="selectRow.emit(row.receiver.id)">
+          <td data-label="Transaction">
+            <div class="transactions-table__amount">
+              <i>{{ row.blockTimestamp | date: "HH:mm EEEE" : "UTC+3" }}</i>
+              <b>{{ row.historicalUsd | numberFormatter }}$</b>
+            </div>
+          </td>
+          <td data-label="Sell">
+            <div class="transactions-table__name">
+              <span class="transactions-table__name-label">{{
+                row.sender.label || "..." + (row.sender.address | slice: -4)
+              }}</span>
+              <div class="transactions-table__name-img">
+                <img
+                  [src]="row.sourceToken.externalId | transactionsTokenName"
+                  [alt]="row.sourceToken.externalId"
+                />
+                <a
+                  (click)="preventClick($event)"
+                  class="transactions-table__name-symbol"
+                  target="_blank"
+                  href="https://www.google.com/search?q={{
+                    row.sourceToken.symbol
+                  }}+coin&sourceid=chrome&ie=UTF-8"
+                  >{{ row.sourceToken.symbol }}</a
+                >
+              </div>
+              <b>
+                {{
+                  (row.historicalUsd | mathAbs) /
+                    (row.sourceUnitValue | mathAbs)
+                    | round
+                    | numberFormatter
+                }}$
+              </b>
+              <b style="color: rgb(246, 65, 65)">{{
+                row.sourceUnitValue | numberFormatter
+              }}</b>
+            </div>
+          </td>
+          <td data-label="Buy">
+            <div class="transactions-table__name">
+              <span class="transactions-table__name-label">{{
+                row.receiver.label || "..." + (row.receiver.address | slice: -4)
+              }}</span>
+              <div class="transactions-table__name-img">
+                <img
+                  [src]="
+                    row.destinationToken.externalId | transactionsTokenName
+                  "
+                  [alt]="row.destinationToken.externalId"
+                />
+                <a
+                  class="transactions-table__name-symbol"
+                  (click)="preventClick($event)"
+                  target="_blank"
+                  href="https://www.google.com/search?q={{
+                    row.destinationToken.symbol
+                  }}+coin&sourceid=chrome&ie=UTF-8"
+                  >{{ row.destinationToken.symbol }}</a
+                >
+              </div>
+              <b>
+                {{
+                  (row.historicalUsd | mathAbs) /
+                    (row.destinationUnitValue | mathAbs)
+                    | round
+                    | numberFormatter
+                }}$
+              </b>
+              <b style="color: green">{{
+                row.destinationUnitValue | numberFormatter
+              }}</b>
+            </div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

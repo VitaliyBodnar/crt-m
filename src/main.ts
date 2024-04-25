@@ -8,10 +8,10 @@ import {
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
-import { environment } from './environments/environment';
 import { provideHttpClient } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { environment } from './environment/environment';
 
 if (environment.production) {
   enableProdMode();
@@ -27,6 +27,7 @@ bootstrapApplication(AppComponent, {
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    }), provideAnimationsAsync(),
+    }),
+    provideAnimationsAsync(),
   ],
 });

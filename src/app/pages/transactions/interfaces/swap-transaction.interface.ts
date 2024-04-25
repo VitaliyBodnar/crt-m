@@ -1,20 +1,32 @@
 export interface ISwapTransaction {
-  token0Id: string;
-  token0Name: string;
-  token0Symbol: string;
-  token1Id: string;
-  token1Name: string;
-  token1Symbol: string;
-  sender: {
-    address: string;
-    isUserAddress: false;
-  };
-  receiver: {
-    address: string;
-    isUserAddress: false;
-  };
+  sender: ISwapAddress;
+  receiver: ISwapAddress;
+  sourceToken: ISwapToken;
+  destinationToken: ISwapToken;
+  externalId: string;
+  sourceUnitValue: number;
+  destinationUnitValue: number;
+  historicalUsd: number;
+  blockHash: string;
+  blockNumber: number;
   blockTimestamp: string;
-  unitValue0: number;
-  unitValue1: number;
-  historicalUSD: number;
+  chain: string;
+}
+
+interface ISwapToken {
+  id: number;
+  externalId: string;
+  name: string;
+  symbol: string;
+  address: string;
+  service: string;
+}
+
+interface ISwapAddress {
+  id: number;
+  address: string;
+  chain: string;
+  label: string;
+  isUserAddress: boolean;
+  contract: boolean;
 }

@@ -1,0 +1,36 @@
+<div class="user-info">
+  <div class="user-info__user">
+    <b>Balance: {{ (userBalance$ | async | numberFormatter) || 0 }}$</b>
+
+    <button
+      class="user-info__back-button"
+      mat-mini-fab
+      color="primary"
+      (click)="goBack()"
+    >
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+  </div>
+
+  <hr class="user-info__line" />
+
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="user-info__filter">
+          <crt-transactions-volume
+            (volumeChange)="onVolumeChange($event)"
+          ></crt-transactions-volume>
+        </div>
+        <div class="user-info__inner">
+          <crt-transactions-table
+            [transactions]="transactions"
+            [isLoading]="isLoading$ | async"
+          ></crt-transactions-table>
+        </div>
+      </div>
+
+      <div class="swiper-slide">Tokens list...</div>
+    </div>
+  </div>
+</div>
